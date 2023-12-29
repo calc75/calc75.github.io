@@ -1,7 +1,60 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+<head>
+
+<script>
+
+const Kings = ["Rehoboam", "Abijah", "Asa", "Jehoshaphat", "Jehoram",
+"Ahaziah", "Queen Athaliah", "Jehoash", "Amaziah", "Uzziah (Azariah)", 
+"Jotham", "Ahaz", "Hezekiah", "Manasseh", "Amon", "Josiah", "Jehoahaz",
+"Jehoiakim", "Jehoiakim", "Jehoiachin", "Zedekiah"];
+
+const NumberKings = 21
+
+function PopulateListOfKings() {
+
+	let iKing = 1
+	let idKing = "King"
+	
+	while (iKing <= NumberKings) {
+		idKing = "King" + iKing.toString()
+		document.getElementById(idKing).innerHTML = Kings[iKing-1]
+		iKing = iKing + 1
+	}	
+	
+}
+
+
+</script>
+</head>
+
+<body onload="PopulateListOfKings()">
+<h1>Order the Kings of Israel</h1>
+<p>
+<ul>
+  <li id="King1"></li>
+  <li id="King2"></li>
+  <li id="King3"></li>
+  <li id="King4"></li>
+  <li id="King5"></li>
+  <li id="King6"></li>
+  <li id="King7"></li>
+  <li id="King8"></li>
+  <li id="King9"></li>
+  <li id="King10"></li>
+  <li id="King11"></li>
+  <li id="King12"></li>
+  <li id="King13"></li>
+  <li id="King14"></li>
+  <li id="King15"></li>
+  <li id="King16"></li>
+  <li id="King17"></li>
+  <li id="King18"></li>
+  <li id="King19"></li>
+  <li id="King20"></li>
+  <li id="King21"></li>  
+ </ul>
+
 </body>
 </html>
