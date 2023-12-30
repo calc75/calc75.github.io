@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script>
+
+const Events = ["1914-1918 C.E.", "Anglo-America becomes World Power",
+"30 B.C.E.", "Rome becomes World Power", "168/167 B.C.E.", "Temple desecrated - Maccabees revolt",
+"198 B.C.E.", "Judah under Syria", "331 B.C.E", "Greece become World Power",
+"332 B.C.E.", "Alexander conquers Egypt and Tyre", "406 B.C.E.", "Jerusalem rebuilt",
+"455 B.C.E.", "Artaxerxes Longimanus sends Nehemiah to rebuild Jerusalem",
+"515 B.C.E.", "Rebuilding of Temple Completed", "520 B.C.E.", "King Darius lifted the ban on the temple work",
+"522 B.C.E.", "Ban on Temple Construction", "538/537 B.C.E.", "Cyrus decree release of Jews",
+"539 B.C.E.", "Medo-Persia becomes World Power", "607 B.C.E.", "Destruction of Jerusalem",
+"617 B.C.E.", "First Exiles of Babylon", "618 B.C.E.", "Nebuchadnezzare besieges Jerusalem",
+"625 B.C.E.", "Babylon becomes World Power", "632 B.C.E.", "Fall of Niniveh",
+"740 B.C.E.", "Ten-tribe kingdom of Israel falls", "997 B.C.E.", "Kingdom split",
+"1026 B.C.E.", "Temple dedication", "1027 B.C.E.", "Solomon completes the temple",
+"1034 B.C.E.", "Temple Constructions Begins", "1037 B.C.E.", "Solomon Reigns as King",
+"1077 B.C.E.", "David Reigns as King", "1117 B.C.E.", "Saul Reigns as King",
+"1467 B.C.E.", "Conquest of Canaan Completed", "1473 B.C.E.", "Death of Moses - Israelites enter Promised Land",
+"1512 B.C.E.", "Aaronic Priesthood Installed", "1513 B.C.E.", "Exodus from Egypt - Law covenant",
+"1657 B.C.E.", "Joseph dies", "c. 1600 B.C.E.", "Egypt becomes World Power",
+"2370 B.C.E.", "Flood", "4026 B.C.E.", "Creation of Adam"];
+
+const NumberEvents = 34;
+
+var ActualEvent = 1;
+
+function PopulateListOfEvents() {
+
+	let iEvent = 1;
+	let idEvent = "Event";
+	let iRandomLeft = 1;
+	let iRandomRight = 1;
+	let tempEvent = "";
+	let tempDate = "";
+
+	document.getElementById("finish").innerHTML = "0/34";
+	document.getElementById("finish").style = "color:green";
+	
+	for (let i = 0; i < 20; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberEvents) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		}
+
+		tempDate = Events[(iRandomLeft-1)*2];
+		tempEvent = Events[((iRandomLeft-1)*2)+1];
+		Events[(iRandomLeft-1)*2] = Events[(iRandomRight-1)*2];
+		Events[((iRandomLeft-1)*2)+1] = Events[((iRandomRight-1)*2)+1];
+		Events[(iRandomRight-1)*2] = tempDate;
+		Events[((iRandomRight-1)*2)+1] = tempEvent;		
+	}
+	
+	while (iEvent <= NumberEvents) {
+		
+		idEvent = "Event" + iEvent.toString();
+		document.getElementById(idEvent).innerHTML = Events[((iEvent-1)*2)];
+		iEvent = iEvent + 1;
+	}	
+	
+	for (let i = 0; i < 20; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberEvents) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		}
+
+		tempDate = Events[(iRandomLeft-1)*2];
+		tempEvent = Events[((iRandomLeft-1)*2)+1];
+		Events[(iRandomLeft-1)*2] = Events[(iRandomRight-1)*2];
+		Events[((iRandomLeft-1)*2)+1] = Events[((iRandomRight-1)*2)+1];
+		Events[(iRandomRight-1)*2] = tempDate;
+		Events[((iRandomRight-1)*2)+1] = tempEvent;		
+	}
+	
+	document.getElementById("Event").innerHTML = Events[1];
+}
+
+
+function CheckEvent(idCheckEvent) {
+
+	let EventGuessed = "";
+	
+	EventGuessed = document.getElementById(idCheckEvent).innerHTML;
+	
+	if (EventGuessed == Events[((ActualEvent-1)*2)]) {
+		document.getElementById(idCheckEvent).style = "background-color:green";
+		document.getElementById(idCheckEvent).disabled = 1;
+		document.getElementById("finish").innerHTML = ActualEvent.toString() + "/34";
+		document.getElementById("finish").style = "color:green";
+		ActualEvent = ActualEvent + 1;
+		document.getElementById("Event").innerHTML = Events[((ActualEvent-1)*2)+1];
+	}
+	else {
+		document.getElementById("finish").style = "color:red";		
+	}
+	
+	if (ActualEvent == (NumberEvents+1)) {
+		document.getElementById("finish").style = "color:green";
+		document.getElementById("finish").innerHTML = "!! Congratulation !!";
+		document.getElementById("Event").innerHTML = "";
+	}
+		
+}
+
+
+</script>
+
+<style>
+.buttonBig {
+  font-size: 36px;	
+  font-family:verdana;
+  width: 50%}
+ 
+ .parBig {
+   font-size: 40px;
+   font-family:verdana;
+   }
+   
+.navbar {
+  position:fixed;
+  text-align:center;
+  font-size:40px;
+  font-family:verdana;
+  }
+  
+.main {
+  margin-top:30px;
+  }
+</style>
+
+</head>
+
+<body onload="PopulateListOfEvents()">
+
+<div>
+<center>
+<p class="parBig"><B>Match the Date with the Event</B></p>
+<p></p>
+<p id="Event" class="parBig"></p>
+<p></p>
+<p id="finish" class="parBig"></p>
+<p></p>
+</center>
+</div>
+
+<div>
+<center>
+
+<button type="button" id="Event1" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event2" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event3" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event4" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event5" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event6" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event7" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event8" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event9" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event10" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event11" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event12" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event13" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event14" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event15" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event16" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event17" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event18" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event19" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event20" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event21" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event22" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event23" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event24" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event25" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event26" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event27" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event28" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event29" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event30" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event31" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event32" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event33" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event34" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+
+</center>
+</div>
+
+</body>
+</html>

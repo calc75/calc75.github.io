@@ -27,7 +27,8 @@ function PopulateListOfKings() {
 	let iRandomRight = 1;
 	let tempKing = ""
 
-	document.getElementById("finish").innerHTML = "";
+	document.getElementById("finish").innerHTML = "0/20";
+	document.getElementById("finish").style = "color:green";
 	
 	for (let i = 0; i < 10; i++) {
 
@@ -50,7 +51,7 @@ function PopulateListOfKings() {
 		document.getElementById(idKing).innerHTML = RandomKings[iKing-1];
 		iKing = iKing + 1;
 	}	
-			
+	
 }
 
 
@@ -63,15 +64,17 @@ function CheckKing(idCheckKing) {
 	if (KingGuessed == Kings[ActualKing-1]) {
 		document.getElementById(idCheckKing).style = "background-color:green";
 		document.getElementById(idCheckKing).disabled = 1;
+		document.getElementById("finish").innerHTML = ActualKing.toString() + "/20";
+		document.getElementById("finish").style = "color:green";
 		ActualKing = ActualKing + 1;
 	}
 	else {
-		document.getElementById(idCheckKing).style = "background-color:red";
+		document.getElementById("finish").style = "color:red";		
 	}
 	
 	if (ActualKing == (NumberKings+1)) {
 		document.getElementById("finish").style = "color:green";
-		document.getElementById("finish").innerHTML = "Congratulation !!!";
+		document.getElementById("finish").innerHTML = "!! Congratulation !!";
 	}
 		
 }
@@ -81,28 +84,43 @@ function CheckKing(idCheckKing) {
 
 <style>
 .buttonBig {
-  font-size: 48px;	
+  font-size: 40px;	
   font-family:verdana;
   width: 50%}
  
  .parBig {
-   font-size: 48px;
+   font-size: 40px;
    font-family:verdana;
    }
+   
+.navbar {
+  position:fixed;
+  text-align:center;
+  font-size:40px;
+  font-family:verdana;
+  }
+  
+.main {
+  margin-top:30px;
+  }
 </style>
 
 </head>
 
 <body onload="PopulateListOfKings()">
 
+<div>
 <center>
-<p class="parBig">Order the Kings of Judah</p>
-</center>
-
-<center>
+<p class="parBig"><B>Order the Kings of Judah</B></p>
 <p></p>
 <p id="finish" class="parBig"></p>
 <p></p>
+</center>
+</div>
+
+<div>
+<center>
+
 <button type="button" id="King1" onclick="CheckKing(this.id)" class="buttonBig"></button>
 <p></p>
 <button type="button" id="King2" onclick="CheckKing(this.id)" class="buttonBig"></button>
@@ -144,6 +162,7 @@ function CheckKing(idCheckKing) {
 <button type="button" id="King20" onclick="CheckKing(this.id)" class="buttonBig"></button>
 
 </center>
+</div>
 
 </body>
 </html>
