@@ -18,6 +18,7 @@ const RandomKings = ["Rehoboam", "Abijah", "Asa", "Jehoshaphat", "Jehoram",
 const NumberKings = 20
 
 var ActualKing = 1;
+var ErrorsCount = 0;
 
 function PopulateListOfKings() {
 
@@ -29,6 +30,7 @@ function PopulateListOfKings() {
 
 	document.getElementById("finish").innerHTML = "0/20";
 	document.getElementById("finish").style = "color:green";
+	document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
 	
 	for (let i = 0; i < 10; i++) {
 
@@ -69,16 +71,17 @@ function CheckKing(idCheckKing) {
 		ActualKing = ActualKing + 1;
 	}
 	else {
-		document.getElementById("finish").style = "color:red";		
+		ErrorsCount = ErrorsCount + 1;
+		document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+		document.getElementById(idCheckKing).style = "background-color:red";
 	}
 	
 	if (ActualKing == (NumberKings+1)) {
 		document.getElementById("finish").style = "color:green";
-		document.getElementById("finish").innerHTML = "!! Congratulation !!";
+		document.getElementById("finish").innerHTML = "!! Congratulations !!";
 	}
 		
 }
-
 
 </script>
 
@@ -91,6 +94,12 @@ function CheckKing(idCheckKing) {
  .parBig {
    font-size: 40px;
    font-family:verdana;
+   }
+   
+ .parMid {
+   font-size: 30px;
+   font-family:verdana;
+   color: red;
    }
    
 .navbar {
@@ -114,6 +123,7 @@ function CheckKing(idCheckKing) {
 <p class="parBig"><B>Order the Kings of Judah</B></p>
 <p></p>
 <p id="finish" class="parBig"></p>
+<p id="errors" class="parMid"></p>
 <p></p>
 </center>
 </div>
