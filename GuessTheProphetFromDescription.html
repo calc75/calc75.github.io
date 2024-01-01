@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script>
+
+const Events = [
+"Elijah", "Audience: 10 tribes during Ahab and Ahaziah",
+"Elijah", "Miracles: shutting off rain from heaven, keeping the flour and oil supply of the widow of Zarephath renewed, resurrecting the widow&apos;s son, having fire fall from heaven in answer to prayer",
+"Elijah", "Miracles: having rain break the drought in answer to prayer, calling down fire on King Ahaziah&apos;s captain and his 50 men, calling down fire on a second captain and his 50, parting the Jordan River by smiting it with his official garment",
+"Elisha", "Audience: 10 tribe during Jehoram, Jehu, Jehoahaz, Jehoash",
+"Elisha", "Prophesied for about 60 years",
+"Elisha", "Miracles: The waters of the Jordan are made to divide, The bad water supply of Jericho is made healthful, Juvenile delinquents are attacked by bears, Water is supplied to armies, A widow receives edible oil, A barren Shunammite woman conceives a child, A child is raised from the dead, A poisonous stew becomes edible",
+"Elisha", "Miracles: One hundred men are fed with 20 loaves, Naaman is healed of his leprosy, Gehazi receives Naaman&apos;s leprosy, An axhead is made to float, A servant sees angelic chariots, The Syrian army is struck with blindness, The sight of the Syrian army is restored, A dead man comes to life",
+"Jonah", "Completed his book about 844 B.C.E.",
+"Jonah", "Audience: 10 tribe during Jereboam II and Nineveh",
+"Jonah", "Message: God&apos;s mercy is not limited to any one nation, not even to Israel",
+"Joel", "His book was written in Judah about 820 B.C.E.",
+"Joel", "Audience: Judah during good King Uzziah",
+"Joel", "Message: Insect invasion strips the land; day of Jehovah near; Turn to Jehovah; spirit to be poured out on all sort of flesh",
+"Amos", "His book was written in Judah about 804 B.C.E.",
+"Amos", "Audience: 10-tribe during Jereboam II; Judah during Jotham, Ahaz and Hezekiah",
+"Amos", "He was called though not a prophet nor the son of a prophet but a nipper of figs",
+"Amos", "Message: Judgments against the surrounding nations, Jehovah cares how we treat our brothers",
+"Hosea", "His book was written in Samaria (district) after 745 B.C.E. and it covers the time before 804 to after 745 B.C.E.",
+"Hosea", "Audience: 10-tribe (Ephraim); Message: A plea to Israel to leave their unfaithfulness and receive mercy and forgiveness",
+"Hosea", "Instructed to marry  a wife of fornication",
+"Isaiah", "His book was written in Jerusalem after 732 B.C.E. and it covers the time from about 778 to 732 B.C.E.",
+"Isaiah", "Audience: Uzziah, Jotham, Ahaz, Hezekiah",
+"Isaiah", "Message: A message of Salvation; At a time of political unrest, religious hypocrisy and judicial corruption Jehovah said: Let us set matters straight between us",
+"Micah", "His book was written in Judah before 717 B.C.E. and it covers the time 777-717 B.C.E.",
+"Micah", "Audience: Jotham, Ahaz and Hezekiah",
+"Micah", "Message: Corroborated Isaiah and Hosea&apos;s message; Moved nation to repentance; Explained what Jehovah requires from us",
+"Zephaniah", "His book was writeen in Judah before 648 B.C.E.",
+"Zephaniah", "Audience: Amon, Josiah, surrounding nations",
+"Zephaniah", "Message: Seek Jehovah and meekness; Pure language; Keep yourselves in expectation of Jehovah",
+"Nahum", "His book was writeen in Judah before 632 B.C.E.",
+"Nahum", "Message: pronouncement against Nineveh; His name means comforter",
+"Habakkuk", "His book was writeen in Judah about 628 B.C.E.",
+"Habakkuk", "Message: How long?; Vision is for appointed time; Keep in expectation; The day of Jehovah is near",
+"Jeremiah", "His book was written in Judah and Egypt in 580 B.C.E. and it covers the time from 647-580 B.C.E.",
+"Jeremiah", "Audience: Jehoahaz, Jehoakim, Jehoiachin, Zedekiah",
+"Jeremiah", "Message: Jerusalem at the center of warring; Destruction for Judah; Stop seeking security in Egypt",
+"Obadiah", "His book was completed about 607 B.C.E.",
+"Obadiah", "Message: Judgement against Edom because they rejoiced over the destruction of Jerusalem; Restoration of Jacob",
+"Ezekiel", "His book was written in Babylon at about 591 B.C.E. and it covers the time 613-591 B.C.E.",
+"Ezekiel", "Message: Judgement against Jerusalem and enemy nations and a message of hope; Four living creatures, Celestial chariot, Six executioners and man with inkhorn, Oholah, Oholiab, Dry bones, Joining two sticks, temple vision",
+"Daniel", "His book was written in Babylon about 536 B.C.E. and it covers the time 618-c. 536 B.C.E.",
+"Daniel", "Message: Vision of metal image, Tree, 4 beasts, Goat and Ram, 70 weeks, King of North and South",
+"Haggai", "His book was written in Jerusalem in 520 B.C.E. and it covers 112 days of the year 520 B.C.E.",
+"Haggai", "Message: Get back to building the temple, Is it time for you to dwell in paneled houses?, Set your heart on your ways",
+"Zechariah", "His book was written in Jerusalem in 518 B.C.E. and it covers the time 520-518 B.C.E.",
+"Zechariah", "Message: Not by military force or power, but by my spirit; Jehovah of armies; Lampstand and two olive trees, Flying scroll, Ephah container, four chariots, Messianic prophecies",
+"Malachi", "His book was written in Jerusalem after 443 B.C.E.",
+"Malachi", "Message: Direct judgement against the priests; Accountability to Jehovah when his requirements are ignored"
+];
+
+const NumberEvents = 48;
+
+var ActualEvent = 1;
+var ErrorsCount = 0;
+
+function PopulateListOfEvents() {
+
+	let iEvent = 1;
+	let idEvent = "Event";
+	let iRandomLeft = 1;
+	let iRandomRight = 1;
+	let tempEvent = "";
+	let tempKing = "";
+
+	document.getElementById("finish").innerHTML = "0/" + NumberEvents.toString();
+	document.getElementById("finish").style = "color:green";
+	document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+	
+	for (let i = 0; i < 40; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberEvents) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		}
+
+		tempKing = Events[(iRandomLeft-1)*2];
+		tempEvent = Events[((iRandomLeft-1)*2)+1];
+		Events[(iRandomLeft-1)*2] = Events[(iRandomRight-1)*2];
+		Events[((iRandomLeft-1)*2)+1] = Events[((iRandomRight-1)*2)+1];
+		Events[(iRandomRight-1)*2] = tempKing;
+		Events[((iRandomRight-1)*2)+1] = tempEvent;		
+	}
+
+	document.getElementById("Event").innerHTML = Events[1];
+}
+
+
+function CheckKing(idCheckKing) {
+
+	let KingGuessed = "";
+	
+	KingGuessed = document.getElementById(idCheckKing).innerHTML;
+	
+	if (KingGuessed == Events[((ActualEvent-1)*2)]) {
+		
+		oldColor = document.getElementById(idCheckKing).style.backgroundColor;  
+		document.getElementById(idCheckKing).style = "background-color:green";
+		setTimeout(RedToGray,800,idCheckKing, oldColor);
+		
+		document.getElementById("finish").innerHTML = ActualEvent.toString() + "/" + NumberEvents.toString();
+		document.getElementById("finish").style = "color:green";
+		ActualEvent = ActualEvent + 1;
+		document.getElementById("Event").innerHTML = Events[((ActualEvent-1)*2)+1];
+	}
+	else {
+		ErrorsCount = ErrorsCount + 1;
+		document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+		
+		oldColor = document.getElementById(idCheckKing).style.backgroundColor;  
+		document.getElementById(idCheckKing).style = "background-color:red";
+		setTimeout(RedToGray,800,idCheckKing, oldColor);
+	}
+	
+	if (ActualEvent == (NumberEvents+1)) {
+		document.getElementById("finish").style = "color:green";
+		document.getElementById("finish").innerHTML = "!! Congratulations !!";
+		document.getElementById("Event").innerHTML = "";
+	}
+		
+}
+
+function RedToGray(idCheckKing, oldColor) {
+
+	document.getElementById(idCheckKing).style = oldColor;
+	
+}
+
+</script>
+
+<style>
+.buttonBig {
+  font-size: 36px;	
+  font-family:verdana;
+  width: 50%}
+ 
+ .parBig {
+   font-size: 40px;
+   font-family:verdana;
+   }
+     
+ .parMid {
+   font-size: 30px;
+   font-family:verdana;
+   color: red;
+   }
+
+ .parMidBlue {
+   font-size: 30px;
+   font-family:verdana;
+   color: blue;
+   }
+  
+ .parSma {
+   font-size: 22px;
+   font-family:verdana;
+   }
+   
+.navbar {
+  position:fixed;
+  text-align:center;
+  font-size:40px;
+  font-family:verdana;
+  }
+  
+.main {
+  margin-top:30px;
+  }
+</style>
+
+</head>
+
+<body onload="PopulateListOfEvents()">
+
+<div>
+<center>
+<p class="parBig">Select the prophet according to the Description</p>
+<p class="parSma">(The same prophet can be selected for several descriptions)</p>
+
+<p></p>
+<p id="Event" class="parMidBlue"></p>
+<p></p>
+<p id="finish" class="parBig"></p>
+<p id="errors" class="parMid"></p>
+<p></p>
+</center>
+</div>
+
+<div>
+<center>
+
+<button type="button" id="Event1" onclick="CheckKing(this.id)" class="buttonBig">Elijah</button>
+<p></p>
+<button type="button" id="Event2" onclick="CheckKing(this.id)" class="buttonBig">Elisha</button>
+<p></p>
+<button type="button" id="Event3" onclick="CheckKing(this.id)" class="buttonBig">Jonah</button>
+<p></p>
+<button type="button" id="Event4" onclick="CheckKing(this.id)" class="buttonBig">Joel</button>
+<p></p>
+<button type="button" id="Event5" onclick="CheckKing(this.id)" class="buttonBig">Amos</button>
+<p></p>
+<button type="button" id="Event6" onclick="CheckKing(this.id)" class="buttonBig">Hosea</button>
+<p></p>
+<button type="button" id="Event7" onclick="CheckKing(this.id)" class="buttonBig">Isaiah</button>
+<p></p>
+<button type="button" id="Event8" onclick="CheckKing(this.id)" class="buttonBig">Micah</button>
+<p></p>
+<button type="button" id="Event9" onclick="CheckKing(this.id)" class="buttonBig">Zephaniah</button>
+<p></p>
+<button type="button" id="Event10" onclick="CheckKing(this.id)" class="buttonBig">Nahum</button>
+<p></p>
+<button type="button" id="Event11" onclick="CheckKing(this.id)" class="buttonBig">Habakkuk</button>
+<p></p>
+<button type="button" id="Event12" onclick="CheckKing(this.id)" class="buttonBig">Jeremiah</button>
+<p></p>
+<button type="button" id="Event13" onclick="CheckKing(this.id)" class="buttonBig">Obadiah</button>
+<p></p>
+<button type="button" id="Event14" onclick="CheckKing(this.id)" class="buttonBig">Ezekiel</button>
+<p></p>
+<button type="button" id="Event15" onclick="CheckKing(this.id)" class="buttonBig">Daniel</button>
+<p></p>
+<button type="button" id="Event16" onclick="CheckKing(this.id)" class="buttonBig">Haggai</button>
+<p></p>
+<button type="button" id="Event17" onclick="CheckKing(this.id)" class="buttonBig">Zechariah</button>
+<p></p>
+<button type="button" id="Event18" onclick="CheckKing(this.id)" class="buttonBig">Malachi</button>
+<p></p>
+
+</center>
+</div>
+
+</body>
+</html>
