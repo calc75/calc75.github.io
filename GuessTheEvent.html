@@ -90,6 +90,7 @@ function PopulateListOfEvents() {
 function CheckEvent(idCheckEvent) {
 
 	let EventGuessed = "";
+	let oldColor = "";
 	
 	EventGuessed = document.getElementById(idCheckEvent).innerHTML;
 	
@@ -104,6 +105,10 @@ function CheckEvent(idCheckEvent) {
 	else {
 		ErrorsCount = ErrorsCount + 1;
 		document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+		
+		oldColor = document.getElementById(idCheckEvent).style.backgroundColor;  
+		document.getElementById(idCheckEvent).style = "background-color:red";
+		setTimeout(RedToGray,800,idCheckEvent, oldColor);
 	}
 	
 	if (ActualEvent == (NumberEvents+1)) {
@@ -114,6 +119,11 @@ function CheckEvent(idCheckEvent) {
 		
 }
 
+function RedToGray(idCheckEvent, oldColor) {
+
+	document.getElementById(idCheckEvent).style = oldColor;
+	
+}
 
 </script>
 

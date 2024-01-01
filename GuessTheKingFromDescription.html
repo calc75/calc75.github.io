@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script>
+
+const Events = [
+"Saul", "1117-1077 (40 yrs.)", 
+"Saul", "At first was meek humble and modest. He first disobeyed by offering a burnt sacrifice and Jehovah tells him he will be replaced as king",
+"Saul", "The second time he disobeys is by sparing King Agag. He is then rejected as king",
+"David", "1077-1037 (40 yrs.)",
+"David", "He ruled in Hebron from 1077-1070",
+"David", "He began rule over all Israel in 1070",
+"David", "His wars cleansed the land of wickedness, extended Israel boundaries to what Jehovah promised, and established peace",
+"Solomon", "1037-997 (40 yrs.)",
+"Solomon", "His three major sins were: Accumulating horses, Marrying many foreign wives, apostasy (participating in false religion)",
+"Solomon", "When he became disobedient Jehovah raised up opposers",
+"Solomon", "Because of his apostasy Jehovah said his kingdom would be divided",
+"Rehoboam", "997-980 (17 yrs.)",
+"Rehoboam", "Son of Solomon by his Ammonite wife Naamah.",
+"Rehoboam", "He had the distinction of being, at least briefly, the last king of the united monarchy and then the first ruler of the southern two-tribe kingdom of Judah and Benjamin",
+"Rehoboam", "Ignores the older men and listens to the young men refusing to grant the people&apos;s request to lighten the oppressive measures laid on them by Solomon",
+"Rehoboam", "Follows Jehovah&apos;s laws for a time but then sinks into false worship influenced by his ammonite mother&apos;s family",
+"Abijah (Abijam)", "980-978 (3 yrs.)",
+"Abijah (Abijam)", "Son of Maacah, granddaughter of Absalom",
+"Abijah (Abijam)", "He leaned relied on Jehovah at time but his heart was not complete with Jehovah and he allowed false worship to continue in the land",
+"Asa", "978-937 (41 yrs.)",
+"Asa", "He did what was good and right in the eyes of Jehovah. His heart was complete with Jehovah all his life.",
+"Asa", "He made great efforts to restore true worship and even removed his grandmother Maacah from her position because of an obscene idol she made",
+"Asa", "He relied on Jehovah when facing the largest human army recorded in the Bible (Ethiopians)",
+"Asa", "He failed to rely on Jehovah and relied on the king of Syria when threatened by Baasha of Israel",
+"Asa", "When counseled he became offended. He died of an ailment in his feet",
+"Jehoshaphat", "937-913 (25 yrs.)",
+"Jehoshaphat", "Good king. He made a campaign to teach Jehovah&apos;s law and promote true worship. It was so effective that the fear of Jehovah came upon surrounding nations",
+"Jehoshaphat", "He made a marriage alliance with Ahab (His son Jehoram with Athaliah)",
+"Jehoshaphat", "He went into battle with Ahab (who disguised himself)",
+"Jehoshaphat", "When the Moabites and Ammonites wage war, he prays to Jehovah before the whole nation, admitting his own fears and pleading for help",
+"Jehoshaphat", "Jehovah tells him to go down, take your position, and stand still",
+"Jehoram", "913-c. 906 (8 yrs)",
+"Jehoram", "His marriage to Athaliah and the resulting family ties contributed to him becoming a bad king",
+"Ahaziah", "c. 906-c.905 (1 yr.)",
+"Ahaziah", "Walked in the ways of the house of Ahab because of his mother&apos;s influence",
+"Ahaziah", "Put to death by Jehu",
+"Queen Athaliah", "c.905-898 (6 yrs.)",
+"Jehoash", "898-858 (40 yrs.)",
+"Jehoash", "Saved by Jehoshabeath and High Priest Jehoiada",
+"Jehoash", "He did what was right in Jehovah&apos;s eyes all the days of Jehoiada",
+"Jehoash", "Later, he listened to the princes, starting serving the sacred poles and killed Jehoiada&apos;s son Zechariah",
+"Jehoash", "His own servants conspired and killed him because of what he did to Zechariah",
+"Amaziah", "858-829 (29 yrs.)",
+"Amaziah", "After striking down the Edomites, he brought their God&apos;s for himself and set them up to worship them",
+"Uzziah (Azariah)", "829-777 (52 yrs.)",
+"Uzziah (Azariah)", "As a youth he was humble and did what was right in Jehovah&apos;s eyes in the days of Zechariah, his spiritual mentor",
+"Uzziah (Azariah)", "As soon as he was strong, he became haughty and he entered the temple to burn incense",
+"Uzziah (Azariah)", "He refused correction and was struck with leprosy",
+"Jotham", "777-762 (16 yrs,)",
+"Jotham", "We only know he was good. He kept doing what was right in Jehovah&apos;s eyes.",
+"Ahaz", "762-746 (16 yrs.)",
+"Ahaz", "He walked in the ways of the kings of Israel. He closed the doors of the house of Jehovah",
+"Ahaz", "He shortsightedly bribe&apos;s Assyria to help protect the nation from Israel and Syria",
+"Ahaz", "The nation comes under the oppressive arm of Assyria (tributary king). He built a pagan alter like the one that he sees in Damascus",
+"Ahaz", "He desecrated much of the temple&apos;s copper features",
+"Hezekiah", "746-716 (29 yrs.)",
+"Hezekiah", "Good. He kept doing what was right in Jehovah&apos;s eyes. He has two campaigns to restore true worship and ensure its continuation by organizing the priesthood and getting rid of high places and alters",
+"Hezekiah", "He rebels against the King of Assyria",
+"Hezekiah", "When he is sick he prays to Jehovah and received 15 more years of life and a sign when the shadow went back 10 steps",
+"Hezekiah", "Jehovah gives him victory of Sennacherib and the Assyrian army by mean of an angel that kills 185000",
+"Manasseh", "716-661 (55 yrs.)",
+"Manasseh", "He did what was bad in Jehovah&apos;s eyes, rebuilding the high places his father had destroyed, setting up altars to Baal, worshiping all the army of the heavens",
+"Manasseh", "He was punished and the king of Assyria took him captive to Babylon",
+"Manasseh", "He repented, humbled himself, and prayed to Jehovah and was restored to the kingship",
+"Amon", "661-659 (2 yrs.)",
+"Amon", "He was so terrible that his own servant conspired against him after only 2 years as king and killed him",
+"Josiah", "659-628 (31 yrs.)",
+"Josiah", "He was contemporary with Jeremiah",
+"Josiah", "He puts the Ark in the temple and this is the last mention of it in the Bible",
+"Josiah", "He was killed by Pharoah Nechoh at Megiddo",
+"Jehoahaz", "628 (3 months)",
+"Jehoahaz", "After reigning a quarter of a year, he was taken into exile in Egypt by pharaoh Nechoh. There he died",
+"Jehoiakim", "628-618 (11 years)",
+"Jehoiakim", "Josiah&apos;s son put on the throne by pharaoh Necho",
+"Jehoiakim", "Subjugated by Nebuchadnezzar from 620-618 (three years) until he rebels and Nebuchadnezzar lays siege. He dies during this siege",
+"Jehoiachin", "618-617 (3 months, 10 days)",
+"Jehoiachin", "Josiah&apos;s grandson",
+"Jehoiachin", "Felt obliged to surrender to the king of Babylon who was then besieging Jerusalem. Taken with more than 10000 Israelites were brought into exile in Babylon",
+"Zedekiah", "617-607 (11 yrs.)",
+"Zedekiah", "King as a vassal to Emperor Nebuchadnezzar",
+"Zedekiah", "After witnessing the death of his sons, he was blinded, bound with copper fetters, and taken to Babylon, where he died in the house of custody",
+];
+
+const NumberEvents = 81;
+
+var ActualEvent = 1;
+var ErrorsCount = 0;
+
+function PopulateListOfEvents() {
+
+	let iEvent = 1;
+	let idEvent = "Event";
+	let iRandomLeft = 1;
+	let iRandomRight = 1;
+	let tempEvent = "";
+	let tempKing = "";
+
+	document.getElementById("finish").innerHTML = "0/" + NumberEvents.toString();
+	document.getElementById("finish").style = "color:green";
+	document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+	
+	for (let i = 0; i < 50; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberEvents) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		}
+
+		tempKing = Events[(iRandomLeft-1)*2];
+		tempEvent = Events[((iRandomLeft-1)*2)+1];
+		Events[(iRandomLeft-1)*2] = Events[(iRandomRight-1)*2];
+		Events[((iRandomLeft-1)*2)+1] = Events[((iRandomRight-1)*2)+1];
+		Events[(iRandomRight-1)*2] = tempKing;
+		Events[((iRandomRight-1)*2)+1] = tempEvent;		
+	}
+
+	document.getElementById("Event").innerHTML = Events[1];
+}
+
+
+function CheckKing(idCheckKing) {
+
+	let KingGuessed = "";
+	
+	KingGuessed = document.getElementById(idCheckKing).innerHTML;
+	
+	if (KingGuessed == Events[((ActualEvent-1)*2)]) {
+		
+		oldColor = document.getElementById(idCheckKing).style.backgroundColor;  
+		document.getElementById(idCheckKing).style = "background-color:green";
+		setTimeout(RedToGray,800,idCheckKing, oldColor);
+		
+		document.getElementById("finish").innerHTML = ActualEvent.toString() + "/" + NumberEvents.toString();
+		document.getElementById("finish").style = "color:green";
+		ActualEvent = ActualEvent + 1;
+		document.getElementById("Event").innerHTML = Events[((ActualEvent-1)*2)+1];
+	}
+	else {
+		ErrorsCount = ErrorsCount + 1;
+		document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+		
+		oldColor = document.getElementById(idCheckKing).style.backgroundColor;  
+		document.getElementById(idCheckKing).style = "background-color:red";
+		setTimeout(RedToGray,800,idCheckKing, oldColor);
+	}
+	
+	if (ActualEvent == (NumberEvents+1)) {
+		document.getElementById("finish").style = "color:green";
+		document.getElementById("finish").innerHTML = "!! Congratulations !!";
+		document.getElementById("Event").innerHTML = "";
+	}
+		
+}
+
+function RedToGray(idCheckKing, oldColor) {
+
+	document.getElementById(idCheckKing).style = oldColor;
+	
+}
+
+</script>
+
+<style>
+.buttonBig {
+  font-size: 36px;	
+  font-family:verdana;
+  width: 50%}
+ 
+ .parBig {
+   font-size: 40px;
+   font-family:verdana;
+   }
+     
+ .parMid {
+   font-size: 30px;
+   font-family:verdana;
+   color: red;
+   }
+
+ .parMidBlue {
+   font-size: 30px;
+   font-family:verdana;
+   color: blue;
+   }
+  
+ .parSma {
+   font-size: 22px;
+   font-family:verdana;
+   }
+   
+.navbar {
+  position:fixed;
+  text-align:center;
+  font-size:40px;
+  font-family:verdana;
+  }
+  
+.main {
+  margin-top:30px;
+  }
+</style>
+
+</head>
+
+<body onload="PopulateListOfEvents()">
+
+<div>
+<center>
+<p class="parBig">Select the king with the Description</p>
+<p class="parSma">(The same kings can be select for several descriptions)</p>
+
+<p></p>
+<p id="Event" class="parMidBlue"></p>
+<p></p>
+<p id="finish" class="parBig"></p>
+<p id="errors" class="parMid"></p>
+<p></p>
+</center>
+</div>
+
+<div>
+<center>
+
+<button type="button" id="Event1" onclick="CheckKing(this.id)" class="buttonBig">Saul</button>
+<p></p>
+<button type="button" id="Event2" onclick="CheckKing(this.id)" class="buttonBig">David</button>
+<p></p>
+<button type="button" id="Event3" onclick="CheckKing(this.id)" class="buttonBig">Solomon</button>
+<p></p>
+<button type="button" id="Event4" onclick="CheckKing(this.id)" class="buttonBig">Rehoboam</button>
+<p></p>
+<button type="button" id="Event5" onclick="CheckKing(this.id)" class="buttonBig">Abijah (Abijam)</button>
+<p></p>
+<button type="button" id="Event6" onclick="CheckKing(this.id)" class="buttonBig">Asa</button>
+<p></p>
+<button type="button" id="Event7" onclick="CheckKing(this.id)" class="buttonBig">Jehoshaphat</button>
+<p></p>
+<button type="button" id="Event8" onclick="CheckKing(this.id)" class="buttonBig">Jehoram</button>
+<p></p>
+<button type="button" id="Event9" onclick="CheckKing(this.id)" class="buttonBig">Ahaziah</button>
+<p></p>
+<button type="button" id="Event10" onclick="CheckKing(this.id)" class="buttonBig">Queen Athaliah</button>
+<p></p>
+<button type="button" id="Event11" onclick="CheckKing(this.id)" class="buttonBig">Jehoash</button>
+<p></p>
+<button type="button" id="Event12" onclick="CheckKing(this.id)" class="buttonBig">Amaziah</button>
+<p></p>
+<button type="button" id="Event13" onclick="CheckKing(this.id)" class="buttonBig">Uzziah (Azariah)</button>
+<p></p>
+<button type="button" id="Event14" onclick="CheckKing(this.id)" class="buttonBig">Jotham</button>
+<p></p>
+<button type="button" id="Event15" onclick="CheckKing(this.id)" class="buttonBig">Ahaz</button>
+<p></p>
+<button type="button" id="Event16" onclick="CheckKing(this.id)" class="buttonBig">Hezekiah</button>
+<p></p>
+<button type="button" id="Event17" onclick="CheckKing(this.id)" class="buttonBig">Manasseh</button>
+<p></p>
+<button type="button" id="Event18" onclick="CheckKing(this.id)" class="buttonBig">Amon</button>
+<p></p>
+<button type="button" id="Event19" onclick="CheckKing(this.id)" class="buttonBig">Josiah</button>
+<p></p>
+<button type="button" id="Event20" onclick="CheckKing(this.id)" class="buttonBig">Jehoahaz</button>
+<p></p>
+<button type="button" id="Event21" onclick="CheckKing(this.id)" class="buttonBig">Jehoiakim</button>
+<p></p>
+<button type="button" id="Event22" onclick="CheckKing(this.id)" class="buttonBig">Jehoiachin</button>
+<p></p>
+<button type="button" id="Event23" onclick="CheckKing(this.id)" class="buttonBig">Zedekiah</button>
+<p></p>
+
+</center>
+</div>
+
+</body>
+</html>
