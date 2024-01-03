@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script>
+
+const Events = [
+"Blood of the bull spattered in front of the ark", "Jesus blood in behalf of his spiritual house of 144000 anointed Christians",
+"Blood of the goat", "Jesus blood in behalf of all those who exercise faith in him",
+"Carcasses bruned outside the camp", "Jesus suffered outside the gates of Jerusalem and did not take his fleshly body into heaven",
+"Perfumed incence", "Jesus sincere prayers and burning zeal for pure worship",
+"Goat for Azazel", "Jesus carrying away the sins of those for whom he died",
+"Antitypical day of atonement began and ended", "Began at 29 C.E. at Jesus baptism and ended at 33 C.E. when Jesus presented the value of his sacrifice",
+"Day of atonement date", "Tishri 10",
+"Animal sacrifices", "Could not completely atone for human sin but they pointed forward to Jesus Christ who would completely atone for human sins",
+"Cloud", "Jehovah&apos;s presence",
+"Altar of Burnt offering", "God&apos;s will or arrangement for accepting Jesus&apos; life as a sacrifice",
+"Ark of the Covenant", "Jehovah&apos;s throne associated with his presence",
+"Copper basin", "God&apos;s Word which the high priest used to cleanse the priesthood",
+"Courtyard", "The righteous conditon anointed Christians have on earth before God",
+"Curtain", "Jesus fleshly body",
+"Holy", "Spirit begotten condition of the anointed",
+"Incense Altar", "The offering up of prayers, praise and service to Jehovah",
+"Lampstand", "Enlightened condition of the anointed Christians",
+"Most Holy", "Heaven itself",
+"Screen", "Spirit-begotten condition not fully comprehended by other humans",
+"Table of Showbread", "Spiritual food from the Word of God and provisions from the faithful slave",
+"Burnt offering", "Shows complete devotion, burned whole, all for Jehovah (Voluntary)",
+"Grain offering", "Shows gratitude, from fine flour, the best (Voluntary)",
+"Communion sacrifice", "Shows desire to enjoy a good relationship with God (Voluntary)",
+"Sin offering", "Recognizing imperfection (Mandatory)",
+"Guilt offering", "Recognizing our sin has affected others (Mandatory)"
+];
+
+const NumberEvents = 25;
+
+var ActualEvent = 1;
+var ErrorsCount = 0;
+
+function PopulateListOfEvents() {
+
+	let iEvent = 1;
+	let idEvent = "Event";
+	let iRandomLeft = 1;
+	let iRandomRight = 1;
+	let tempEvent = "";
+	let tempKing = "";
+
+	document.getElementById("finish").innerHTML = "0/" + NumberEvents.toString();
+	document.getElementById("finish").style = "color:green";
+	document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+	
+	for (let i = 0; i < 25; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberEvents) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		}
+
+		tempKing = Events[(iRandomLeft-1)*2];
+		tempEvent = Events[((iRandomLeft-1)*2)+1];
+		Events[(iRandomLeft-1)*2] = Events[(iRandomRight-1)*2];
+		Events[((iRandomLeft-1)*2)+1] = Events[((iRandomRight-1)*2)+1];
+		Events[(iRandomRight-1)*2] = tempKing;
+		Events[((iRandomRight-1)*2)+1] = tempEvent;		
+	}
+
+	document.getElementById("Event").innerHTML = Events[1];
+}
+
+
+function CheckKing(idCheckKing) {
+
+	let KingGuessed = "";
+	
+	KingGuessed = document.getElementById(idCheckKing).innerHTML;
+	
+	if (KingGuessed == Events[((ActualEvent-1)*2)]) {
+		
+		oldColor = document.getElementById(idCheckKing).style.backgroundColor;  
+		document.getElementById(idCheckKing).style = "background-color:green";
+		setTimeout(RedToGray,800,idCheckKing, oldColor);
+		
+		document.getElementById("finish").innerHTML = ActualEvent.toString() + "/" + NumberEvents.toString();
+		document.getElementById("finish").style = "color:green";
+		ActualEvent = ActualEvent + 1;
+		document.getElementById("Event").innerHTML = Events[((ActualEvent-1)*2)+1];
+	}
+	else {
+		ErrorsCount = ErrorsCount + 1;
+		document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+		
+		oldColor = document.getElementById(idCheckKing).style.backgroundColor;  
+		document.getElementById(idCheckKing).style = "background-color:red";
+		setTimeout(RedToGray,800,idCheckKing, oldColor);
+	}
+	
+	if (ActualEvent == (NumberEvents+1)) {
+		document.getElementById("finish").style = "color:green";
+		document.getElementById("finish").innerHTML = "!! Congratulations !!";
+		document.getElementById("Event").innerHTML = "";
+	}
+		
+}
+
+function RedToGray(idCheckKing, oldColor) {
+
+	document.getElementById(idCheckKing).style = oldColor;
+	
+}
+
+</script>
+
+<style>
+.buttonBig {
+  font-size: 36px;	
+  font-family:verdana;
+  width: 50%}
+ 
+ .parBig {
+   font-size: 40px;
+   font-family:verdana;
+   }
+     
+ .parMid {
+   font-size: 30px;
+   font-family:verdana;
+   color: red;
+   }
+
+ .parMidBlue {
+   font-size: 30px;
+   font-family:verdana;
+   color: blue;
+   }
+  
+ .parSma {
+   font-size: 22px;
+   font-family:verdana;
+   }
+   
+.navbar {
+  position:fixed;
+  text-align:center;
+  font-size:40px;
+  font-family:verdana;
+  }
+  
+.main {
+  margin-top:30px;
+  }
+</style>
+
+</head>
+
+<body onload="PopulateListOfEvents()">
+
+<div>
+<center>
+<p class="parBig">Select the element according to the Description</p>
+
+<p></p>
+<p id="Event" class="parMidBlue"></p>
+<p></p>
+<p id="finish" class="parBig"></p>
+<p id="errors" class="parMid"></p>
+<p></p>
+</center>
+</div>
+
+<div>
+<center>
+
+<button type="button" id="Event1" onclick="CheckKing(this.id)" class="buttonBig">Blood of the bull spattered in front of the ark</button>
+<p></p>
+<button type="button" id="Event2" onclick="CheckKing(this.id)" class="buttonBig">Blood of the goat</button>
+<p></p>
+<button type="button" id="Event3" onclick="CheckKing(this.id)" class="buttonBig">Carcasses bruned outside the camp</button>
+<p></p>
+<button type="button" id="Event4" onclick="CheckKing(this.id)" class="buttonBig">Perfumed incence</button>
+<p></p>
+<button type="button" id="Event5" onclick="CheckKing(this.id)" class="buttonBig">Goat for Azazel</button>
+<p></p>
+<button type="button" id="Event6" onclick="CheckKing(this.id)" class="buttonBig">Antitypical day of atonement began and ended</button>
+<p></p>
+<button type="button" id="Event7" onclick="CheckKing(this.id)" class="buttonBig">Day of atonement date</button>
+<p></p>
+<button type="button" id="Event8" onclick="CheckKing(this.id)" class="buttonBig">Animal sacrifices</button>
+<p></p>
+<button type="button" id="Event9" onclick="CheckKing(this.id)" class="buttonBig">Cloud</button>
+<p></p>
+<button type="button" id="Event10" onclick="CheckKing(this.id)" class="buttonBig">Altar of Burnt offering</button>
+<p></p>
+<button type="button" id="Event11" onclick="CheckKing(this.id)" class="buttonBig">Ark of the Covenant</button>
+<p></p>
+<button type="button" id="Event12" onclick="CheckKing(this.id)" class="buttonBig">Copper basin</button>
+<p></p>
+<button type="button" id="Event13" onclick="CheckKing(this.id)" class="buttonBig">Courtyard</button>
+<p></p>
+<button type="button" id="Event14" onclick="CheckKing(this.id)" class="buttonBig">Curtain</button>
+<p></p>
+<button type="button" id="Event15" onclick="CheckKing(this.id)" class="buttonBig">Holy</button>
+<p></p>
+<button type="button" id="Event16" onclick="CheckKing(this.id)" class="buttonBig">Incense Altar</button>
+<p></p>
+<button type="button" id="Event17" onclick="CheckKing(this.id)" class="buttonBig">Lampstand</button>
+<p></p>
+<button type="button" id="Event18" onclick="CheckKing(this.id)" class="buttonBig">Most Holy</button>
+<p></p>
+<button type="button" id="Event19" onclick="CheckKing(this.id)" class="buttonBig">Screen</button>
+<p></p>
+<button type="button" id="Event20" onclick="CheckKing(this.id)" class="buttonBig">Table of Showbread</button>
+<p></p>
+
+<button type="button" id="Event21" onclick="CheckKing(this.id)" class="buttonBig">Burnt offering</button><p></p>
+<button type="button" id="Event22" onclick="CheckKing(this.id)" class="buttonBig">Grain offering</button><p></p>
+<button type="button" id="Event23" onclick="CheckKing(this.id)" class="buttonBig">Communion sacrifice</button><p></p>
+<button type="button" id="Event24" onclick="CheckKing(this.id)" class="buttonBig">Sin offering</button><p></p>
+<button type="button" id="Event25" onclick="CheckKing(this.id)" class="buttonBig">Guilt offering</button><p></p>
+
+</center>
+</div>
+
+</body>
+</html>
