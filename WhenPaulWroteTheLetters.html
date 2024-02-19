@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script>
+
+const II_MISS_JOU = 1;
+const III_MISS_JOU = 2;
+const I_PRISON = 3;
+const BETW_PRISON = 4;
+const II_PRISON = 5;
+
+
+const Events = [
+"Romans", III_MISS_JOU,
+"1 Corinthians", III_MISS_JOU,
+"2 Corinthians", III_MISS_JOU,
+"Galatians", II_MISS_JOU,
+"Ephesians", I_PRISON,
+"Philippians", I_PRISON,
+"Colossians", I_PRISON,
+"1 Thessalonians", II_MISS_JOU,
+"2 Thessalonians", II_MISS_JOU,
+"1 Timothy", BETW_PRISON,
+"2 Timothy", II_PRISON,
+"Titus", BETW_PRISON,
+"Philemon", I_PRISON,
+"Hebrews", I_PRISON];
+
+const NumberEvents = 14;
+
+var ActualEvent = 1;
+var ErrorsCount = 0;
+
+function PopulateListOfEvents() {
+
+	let iEvent = 1;
+	let idEvent = "Event";
+	let iRandomLeft = 1;
+	let iRandomRight = 1;
+	let tempEvent = "";
+	let tempKing = "";
+
+	document.getElementById("finish").innerHTML = "0/" + NumberEvents.toString();
+	document.getElementById("finish").style = "color:green";
+	document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+	
+	for (let i = 0; i < 20; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberEvents) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		}
+
+		tempKing = Events[(iRandomLeft-1)*2];
+		tempEvent = Events[((iRandomLeft-1)*2)+1];
+		Events[(iRandomLeft-1)*2] = Events[(iRandomRight-1)*2];
+		Events[((iRandomLeft-1)*2)+1] = Events[((iRandomRight-1)*2)+1];
+		Events[(iRandomRight-1)*2] = tempKing;
+		Events[((iRandomRight-1)*2)+1] = tempEvent;		
+	}
+
+	document.getElementById("Event").innerHTML = Events[0];
+}
+
+
+function CheckPeriod(idCheckPeriod, idPeriod) {
+
+	let PeriodGuessed = "";
+	
+	PeriodGuessed = idPeriod;
+	
+	if (PeriodGuessed == Events[((ActualEvent-1)*2)+1]) {
+		
+		oldColor = document.getElementById(idCheckPeriod).style.backgroundColor;  
+		document.getElementById(idCheckPeriod).style = "background-color:green";
+		setTimeout(RedToGray,800,idCheckPeriod, oldColor);
+		
+		document.getElementById("finish").innerHTML = ActualEvent.toString() + "/" + NumberEvents.toString();
+		document.getElementById("finish").style = "color:green";
+		ActualEvent = ActualEvent + 1;
+		document.getElementById("Event").innerHTML = Events[((ActualEvent-1)*2)];
+	}
+	else {
+		ErrorsCount = ErrorsCount + 1;
+		document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+		
+		oldColor = document.getElementById(idCheckPeriod).style.backgroundColor;  
+		document.getElementById(idCheckPeriod).style = "background-color:red";
+		setTimeout(RedToGray,800,idCheckPeriod, oldColor);
+	}
+	
+	if (ActualEvent == (NumberEvents+1)) {
+		document.getElementById("finish").style = "color:green";
+		document.getElementById("finish").innerHTML = "!! Congratulations !!";
+		document.getElementById("Event").innerHTML = "";
+	}
+		
+}
+
+function RedToGray(idCheckPeriod, oldColor) {
+
+	document.getElementById(idCheckPeriod).style = oldColor;
+	
+}
+
+</script>
+
+<style>
+.buttonBig {
+  font-size: 36px;	
+  font-family:verdana;
+  width: 50%}
+ 
+ .parBig {
+   font-size: 40px;
+   font-family:verdana;
+   }
+     
+ .parMid {
+   font-size: 30px;
+   font-family:verdana;
+   color: red;
+   }
+
+ .parMidBlue {
+   font-size: 30px;
+   font-family:verdana;
+   color: blue;
+   }
+  
+ .parSma {
+   font-size: 22px;
+   font-family:verdana;
+   }
+   
+.navbar {
+  position:fixed;
+  text-align:center;
+  font-size:40px;
+  font-family:verdana;
+  }
+  
+.main {
+  margin-top:30px;
+  }
+</style>
+
+</head>
+
+<body onload="PopulateListOfEvents()">
+
+<div>
+<center>
+<p class="parBig">Guess the period when Paul wrote his letters</p>
+
+<p></p>
+<p id="Event" class="parMidBlue"></p>
+<p></p>
+<p id="finish" class="parBig"></p>
+<p id="errors" class="parMid"></p>
+<p></p>
+</center>
+</div>
+
+<div>
+<center>
+
+<button type="button" id="Event1" onclick="CheckPeriod(this.id, 1)" class="buttonBig">2nd Missionary journey</button>
+<p></p>
+<button type="button" id="Event2" onclick="CheckPeriod(this.id, 2)" class="buttonBig">3rd Missionary journey</button>
+<p></p>
+<button type="button" id="Event3" onclick="CheckPeriod(this.id, 3)" class="buttonBig">1st Imprisonment in Rome</button>
+<p></p>
+<button type="button" id="Event4" onclick="CheckPeriod(this.id, 4)" class="buttonBig">Between 1st and 2nd Imprisonment in Rome</button>
+<p></p>
+<button type="button" id="Event5" onclick="CheckPeriod(this.id, 5)" class="buttonBig">2nd Imprisonment in Rome</button>
+<p></p>
+
+</center>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script>
+
+/*
+1870 - Russell and his associates started to study the Bible
+1914 - Photo-drama of Creation first shown to the public
+1918 - Brother Rutherford and his several associates sentenced to 20 years of prison
+1922 - Convention at Cedar Point urged to advertise the King and his Kingdom
+1922 - First radio transmission broadcasted
+1931 - The name Jehovah's Witnesses is adopted
+1935 - Understanding of the Great Crowd clarified
+1943 - Theocratic Ministry School began in the congregation
+1943 - The first class of Gilead commenced
+1961 - The complete New World Translation of the Holy Scriptures was released in one volume
+1971 - The Governing Body was enlarged and an annual rotation of the chairmanship began alphabetically
+1972 - Oversight of the congregation changed from one overseer to a body of elders
+1976 - Decided that six administrative committees of the Governing Body would oversee congregations around the world
+2009 - Midweek metting schedule adjusted to emphasize the importance of the family study
+*/
+
+const Events = [
+"1870", "Russell and his associates started to study the Bible",
+"1914", "Photo-drama of Creation first shown to the public",
+"1918", "Brother Rutherford and his several associates sentenced to 20 years of prison",
+"1922", "Convention at Cedar Point urged to advertise the King and his Kingdom - First radio transmission broadcasted",
+"1931", "The name Jehovah's Witnesses is adopted",
+"1935", "Understanding of the Great Crowd clarified",
+"1943", "Theocratic Ministry School began in the congregation - The first class of Gilead commenced",
+"1961", "The complete New World Translation of the Holy Scriptures was released in one volume",
+"1971", "The Governing Body was enlarged and an annual rotation of the chairmanship began alphabetically",
+"1972", "Oversight of the congregation changed from one overseer to a body of elders",
+"1976", "Decided that six administrative committees of the Governing Body would oversee congregations around the world",
+"2009", "Midweek metting schedule adjusted to emphasize the importance of the family study"];
+
+const NumberEvents = 12;
+
+var ActualEvent = 1;
+var ErrorsCount = 0;
+
+function PopulateListOfEvents() {
+
+	let iEvent = 1;
+	let idEvent = "Event";
+	let iRandomLeft = 1;
+	let iRandomRight = 1;
+	let tempEvent = "";
+	let tempDate = "";
+
+	document.getElementById("finish").innerHTML = "0/14";
+	document.getElementById("finish").style = "color:green";
+	document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+	
+	for (let i = 0; i < 20; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberEvents) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		}
+
+		tempDate = Events[(iRandomLeft-1)*2];
+		tempEvent = Events[((iRandomLeft-1)*2)+1];
+		Events[(iRandomLeft-1)*2] = Events[(iRandomRight-1)*2];
+		Events[((iRandomLeft-1)*2)+1] = Events[((iRandomRight-1)*2)+1];
+		Events[(iRandomRight-1)*2] = tempDate;
+		Events[((iRandomRight-1)*2)+1] = tempEvent;		
+	}
+	
+	while (iEvent <= NumberEvents) {
+		
+		idEvent = "Event" + iEvent.toString();
+		document.getElementById(idEvent).innerHTML = Events[((iEvent-1)*2)+1];
+		iEvent = iEvent + 1;
+	}	
+	
+	for (let i = 0; i < 20; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberEvents) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		}
+
+		tempDate = Events[(iRandomLeft-1)*2];
+		tempEvent = Events[((iRandomLeft-1)*2)+1];
+		Events[(iRandomLeft-1)*2] = Events[(iRandomRight-1)*2];
+		Events[((iRandomLeft-1)*2)+1] = Events[((iRandomRight-1)*2)+1];
+		Events[(iRandomRight-1)*2] = tempDate;
+		Events[((iRandomRight-1)*2)+1] = tempEvent;		
+	}
+	
+	document.getElementById("Event").innerHTML = Events[0];
+}
+
+
+function CheckEvent(idCheckEvent) {
+
+	let EventGuessed = "";
+	
+	EventGuessed = document.getElementById(idCheckEvent).innerHTML;
+	
+	if (EventGuessed == Events[((ActualEvent-1)*2)+1]) {
+		
+		oldColor = document.getElementById(idCheckEvent).style.backgroundColor;  
+		document.getElementById(idCheckEvent).style = "background-color:green";
+		setTimeout(RedToGray,800,idCheckEvent, oldColor);
+		document.getElementById("finish").innerHTML = ActualEvent.toString() + "/" + NumberEvents.toString();
+		document.getElementById("finish").style = "color:green";
+		ActualEvent = ActualEvent + 1;
+		document.getElementById("Event").innerHTML = Events[((ActualEvent-1)*2)];
+
+	}
+		
+	else {
+		ErrorsCount = ErrorsCount + 1;
+		document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+		oldColor = document.getElementById(idCheckEvent).style.backgroundColor;  
+		document.getElementById(idCheckEvent).style = "background-color:red";
+		setTimeout(RedToGray,800,idCheckEvent, oldColor);
+	}
+	
+	if (ActualEvent == (NumberEvents+1)) {
+		document.getElementById("finish").style = "color:green";
+		document.getElementById("finish").innerHTML = "!! Congratulations !!";
+		document.getElementById("Event").innerHTML = "";
+	}
+		
+}
+
+function RedToGray(idCheckKing, oldColor) {
+
+	document.getElementById(idCheckKing).style = oldColor;
+}
+
+</script>
+
+<style>
+.buttonBig {
+  font-size: 36px;	
+  font-family:verdana;
+  width: 50%}
+ 
+ .parBig {
+   font-size: 40px;
+   font-family:verdana;
+   }
+     
+ .parMid {
+   font-size: 30px;
+   font-family:verdana;
+   color: red;
+   }
+   
+.navbar {
+  position:fixed;
+  text-align:center;
+  font-size:40px;
+  font-family:verdana;
+  }
+  
+.main {
+  margin-top:30px;
+  }
+</style>
+
+</head>
+
+<body onload="PopulateListOfEvents()">
+
+<div>
+<center>
+<p class="parBig"><B>Match the Event with the Date</B></p>
+<p></p>
+<p id="Event" class="parBig"></p>
+<p></p>
+<p id="finish" class="parBig"></p>
+<p id="errors" class="parMid"></p>
+<p></p>
+</center>
+</div>
+
+<div>
+<center>
+
+<button type="button" id="Event1" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event2" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event3" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event4" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event5" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event6" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event7" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event8" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event9" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event10" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event11" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="Event12" onclick="CheckEvent(this.id)" class="buttonBig"></button>
+<p></p>
+
+</center>
+</div>
+
+</body>
+</html>
