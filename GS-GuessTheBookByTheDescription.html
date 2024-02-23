@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script>
+
+const Events = [
+"Matthew", "Account of Jesus’ life written primarily with the Jews in mind",
+"Matthew", "This Gospel demonstrates that Jesus is the foretold Messianic King",
+"Matthew", "The first Gospel written, it was likely composed initially in Hebrew about eight years after the death and resurrection of Christ",
+"Mark", "Concise, fast-moving account of Jesus’ life, presenting Jesus as the miracle-working Son of God",
+"Mark", "The shortest Gospel, it was the third to be written (c. 60-65 C.E.), evidently with non-Jews in mind",
+"Luke", "Account of the life of Jesus, written to confirm the certainty of events surrounding the life of Christ and in a manner that would appeal to people of all nations",
+"Luke", "The second Gospel written; it was likely recorded between 56 and 58 C.E.",
+"John", "The account of the life of Jesus, highlighting the theme that Jesus is the Christ the Son of God, by means of whom eternal life is possible",
+"John", "Written about 98 C.E., more than 30 years after the last of the other three Gospels and 65 years after the death of Jesus",
+"Acts", "The beginning of the Christian congregation and a record of its zealous public witnessing in the face of fierce opposition",
+"Acts", "Time covered: 33 to c. 61 C.E.",
+"Romans", "A letter explaining that righteousness comes, not as a result of ancestry or through works of the Mosaic Law, but through faith in Jesus Christ and as a result of God’s undeserved kindness",
+"Romans", "Letter written about 56 C.E., some 20 years after the first Gentiles became Christian",
+"1 Corinthians", "A letter sent by Paul after he had received shocking reports about dissensions and immorality and in response to an inquiry about marriage",
+"1 Corinthians", "Letter written from Ephesus, about 55 C.E.",
+"2 Corinthians", "A follow-up letter regarding action taken to keep the congregation clean, to stir up desire to help brothers in Judea, and to counteract the influence of false apostles",
+"2 Corinthians", "Letter written by Paul in 55 C.E., a few months before he arrived in Corinth on his second and final visit",
+"Galatians", "A letter emphasizing appreciation for the freedom that true Christians have through Jesus Christ",
+"Galatians", "Letter written a year or perhaps several years after the --- had been informed about the decision of the governing body that circumcision is not required of Christians",
+"Ephesians", "A letter focusing attention on an administration that results in peace and unity with God through Jesus Christ",
+"Ephesians", "While he was a prisoner in Rome, Paul wrote this letter to the congregation in ---, a port city on the West coast of Asia Minor",
+"Philippians", "A letter reflecting the special bond of love that existed between Paul and the Christians in ---; written by Paul about 60-61 C.E. while in prison in Rome",
+"Colossians", "A letter emphasizing appreciation for the God-given position of Christ as the means to counteract wrong views and practices; written by Paul toward the end of his first imprisonment in Rome",
+"1 Thessalonians", "Encouragement and counsel to a relatively new congregation",
+"1 Thessalonians", "Written by Paul about 50 C.E., a few months after he had left --- because of mob violence",
+"2 Thessalonians", "A letter to correct a wrong view regarding Christ’s presence and to offer counsel on how to treat disorderly persons",
+"2 Thessalonians", "Letter written by Paul about 51 C.E. shortly after his first letter to the same congregation",
+"1 Timothy", "Counsel to a Christian elder regarding his responsibilities",
+"1 Timothy", "Letter written by the apostle Paul evidently sometime after his release from his first imprisonment in Rome",
+"2 Timothy", "Encouragement and counsel to help --- remain firm in the difficult times ahead",
+"2 Timothy", "The last inspired letter written by Paul",
+"Titus", "Counsel to an elder regarding the handling of situations in a most difficult assignment; written by the apostle Paul evidently after his first imprisonment in Rome",
+"Philemon", "A letter encouraging that love and mercy be shown to a runaway slave who had become a Christian",
+"Hebrews", "A powerful treatise that fortified Hebrew Christians and enabled them to help sincere fellow countrymen during the final years of the Jewish system",
+"Hebrews", "Evidently written by the apostle Paul less than a decade before Jerusalem was destroyed in 70 C.E.",
+"James", "A letter emphasizing that faith has to be demonstrated by works",
+"James", "Written before 62 C.E., more than eight years prior to Jerusalem’s destruction by the Romans (not a letter of Paul)",
+"1 Peter", "A letter encouraging Christians to be vigilant and to endure faithfully despite trials",
+"1 Peter", "Written in Babylon by the apostle --- using Silvanus as a secretary, about 62-64 C.E.",
+"2 Peter", "A letter encouraging Christians to exert themselves and to cling to the prophetic word; it contains powerful warnings against apostasy",
+"2 Peter", "Written perhaps from Babylon about 64 C.E.",
+"1 John", "A vigorous treatise designed to safeguard Christians against apostate influences",
+"2 John", "A letter addressed to the chosen lady, perhaps an individual or possibly a congregation",
+"3 John", "An inspired letter to Gaius that can benefit all Christians",
+"Revelation", "A disclosure of God’s view of conditions as well as a foreview of what he permits and what he will accomplish through Christ during the Lord’s day",
+"Revelation", "A series of visions recorded by the apostle John in about 96 C.E."
+];
+
+const NumberEvents = 46;
+
+var ActualEvent = 1;
+var ErrorsCount = 0;
+
+function PopulateListOfEvents() {
+
+	let iEvent = 1;
+	let idEvent = "Event";
+	let iRandomLeft = 1;
+	let iRandomRight = 1;
+	let tempEvent = "";
+	let tempKing = "";
+
+	document.getElementById("finish").innerHTML = "0/" + NumberEvents.toString();
+	document.getElementById("finish").style = "color:green";
+	document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+	
+	for (let i = 0; i < 50; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberEvents) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		}
+
+		tempKing = Events[(iRandomLeft-1)*2];
+		tempEvent = Events[((iRandomLeft-1)*2)+1];
+		Events[(iRandomLeft-1)*2] = Events[(iRandomRight-1)*2];
+		Events[((iRandomLeft-1)*2)+1] = Events[((iRandomRight-1)*2)+1];
+		Events[(iRandomRight-1)*2] = tempKing;
+		Events[((iRandomRight-1)*2)+1] = tempEvent;		
+	}
+
+	document.getElementById("Event").innerHTML = Events[1];
+}
+
+
+function CheckKing(idCheckKing) {
+
+	let KingGuessed = "";
+	
+	KingGuessed = document.getElementById(idCheckKing).innerHTML;
+	
+	if (KingGuessed == Events[((ActualEvent-1)*2)]) {
+		
+		oldColor = document.getElementById(idCheckKing).style.backgroundColor;  
+		document.getElementById(idCheckKing).style = "background-color:green";
+		setTimeout(RedToGray,800,idCheckKing, oldColor);
+		
+		document.getElementById("finish").innerHTML = ActualEvent.toString() + "/" + NumberEvents.toString();
+		document.getElementById("finish").style = "color:green";
+		ActualEvent = ActualEvent + 1;
+		document.getElementById("Event").innerHTML = Events[((ActualEvent-1)*2)+1];
+	}
+	else {
+		ErrorsCount = ErrorsCount + 1;
+		document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+		
+		oldColor = document.getElementById(idCheckKing).style.backgroundColor;  
+		document.getElementById(idCheckKing).style = "background-color:red";
+		setTimeout(RedToGray,800,idCheckKing, oldColor);
+	}
+	
+	if (ActualEvent == (NumberEvents+1)) {
+		document.getElementById("finish").style = "color:green";
+		document.getElementById("finish").innerHTML = "!! Congratulations !!";
+		document.getElementById("Event").innerHTML = "";
+	}
+		
+}
+
+function RedToGray(idCheckKing, oldColor) {
+
+	document.getElementById(idCheckKing).style = oldColor;
+	
+}
+
+</script>
+
+<style>
+.buttonBig {
+  font-size: 36px;	
+  font-family:verdana;
+  width: 50%}
+ 
+ .parBig {
+   font-size: 40px;
+   font-family:verdana;
+   }
+     
+ .parMid {
+   font-size: 30px;
+   font-family:verdana;
+   color: red;
+   }
+
+ .parMidBlue {
+   font-size: 30px;
+   font-family:verdana;
+   color: blue;
+   }
+  
+ .parSma {
+   font-size: 22px;
+   font-family:verdana;
+   }
+   
+.navbar {
+  position:fixed;
+  text-align:center;
+  font-size:40px;
+  font-family:verdana;
+  }
+  
+.main {
+  margin-top:30px;
+  }
+</style>
+
+</head>
+
+<body onload="PopulateListOfEvents()">
+
+<div>
+<center>
+<p class="parBig">Select the Book according to the Description</p>
+<p class="parSma">(The same book can be selected for several descriptions)</p>
+
+<p></p>
+<p id="Event" class="parMidBlue"></p>
+<p></p>
+<p id="finish" class="parBig"></p>
+<p id="errors" class="parMid"></p>
+<p></p>
+</center>
+</div>
+
+<div>
+<center>
+
+<button type="button" id="Event1" onclick="CheckKing(this.id)" class="buttonBig">Matthew</button>
+<p></p>
+<button type="button" id="Event2" onclick="CheckKing(this.id)" class="buttonBig">Mark</button>
+<p></p>
+<button type="button" id="Event3" onclick="CheckKing(this.id)" class="buttonBig">Luke</button>
+<p></p>
+<button type="button" id="Event4" onclick="CheckKing(this.id)" class="buttonBig">John</button>
+<p></p>
+<button type="button" id="Event5" onclick="CheckKing(this.id)" class="buttonBig">Acts</button>
+<p></p>
+<button type="button" id="Event6" onclick="CheckKing(this.id)" class="buttonBig">Romans</button>
+<p></p>
+<button type="button" id="Event7" onclick="CheckKing(this.id)" class="buttonBig">1 Corinthians</button>
+<p></p>
+<button type="button" id="Event8" onclick="CheckKing(this.id)" class="buttonBig">2 Corinthians</button>
+<p></p>
+<button type="button" id="Event9" onclick="CheckKing(this.id)" class="buttonBig">Galatians</button>
+<p></p>
+<button type="button" id="Event10" onclick="CheckKing(this.id)" class="buttonBig">Ephesians</button>
+<p></p>
+<button type="button" id="Event11" onclick="CheckKing(this.id)" class="buttonBig">Philippians</button>
+<p></p>
+<button type="button" id="Event12" onclick="CheckKing(this.id)" class="buttonBig">Colossians</button>
+<p></p>
+<button type="button" id="Event13" onclick="CheckKing(this.id)" class="buttonBig">1 Thessalonians</button>
+<p></p>
+<button type="button" id="Event14" onclick="CheckKing(this.id)" class="buttonBig">2 Thessalonians</button>
+<p></p>
+<button type="button" id="Event15" onclick="CheckKing(this.id)" class="buttonBig">1 Timothy</button>
+<p></p>
+<button type="button" id="Event16" onclick="CheckKing(this.id)" class="buttonBig">2 Timothy</button>
+<p></p>
+<button type="button" id="Event17" onclick="CheckKing(this.id)" class="buttonBig">Titus</button>
+<p></p>
+<button type="button" id="Event18" onclick="CheckKing(this.id)" class="buttonBig">Philemon</button>
+<p></p>
+<button type="button" id="Event19" onclick="CheckKing(this.id)" class="buttonBig">Hebrews</button>
+<p></p>
+<button type="button" id="Event20" onclick="CheckKing(this.id)" class="buttonBig">James</button>
+<p></p>
+<button type="button" id="Event21" onclick="CheckKing(this.id)" class="buttonBig">1 Peter</button>
+<p></p>
+<button type="button" id="Event22" onclick="CheckKing(this.id)" class="buttonBig">2 Peter</button>
+<p></p>
+<button type="button" id="Event23" onclick="CheckKing(this.id)" class="buttonBig">1 John</button>
+<p></p>
+<button type="button" id="Event24" onclick="CheckKing(this.id)" class="buttonBig">2 John</button>
+<p></p>
+<button type="button" id="Event25" onclick="CheckKing(this.id)" class="buttonBig">3 John</button>
+<p></p>
+<button type="button" id="Event26" onclick="CheckKing(this.id)" class="buttonBig">Jude</button>
+<p></p>
+<button type="button" id="Event27" onclick="CheckKing(this.id)" class="buttonBig">Revelation</button>
+<p></p>
+
+</center>
+</div>
+
+</body>
+</html>
