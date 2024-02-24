@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script>
+
+const Events = [
+"Love", "An unselfish emotion, concern with doing good to others regardless of the merits of the recipient",
+"Joy", "A deep-seated quality of the heart; a state of happiness or gladness that remains whether the conditions around us are pleasant or not",
+"Peace", "Conveys the idea of well-being, prosperity, health, and contentedness",
+"Patience", "The endurance of wrong or provocation combined with a refusal to give up hope for improvement in a disturbed relationship",
+"Kindness", "Tender regard and active interest in others shown by considerate words and helpful deeds. Do good rather than do harm",
+"Goodness", "Quality or state of being good. It involves moral excellence and virtue, without badness or rottenness. Evident by its beneficial effect on others",
+"Faith", "Founded on accurate knowledge, facts on which right decisions can be based. It requires not only belief but a reason for believing",
+"Mildness", "Inner, peaceful disposition. To deals with others in a gentle, kind way and to be able to face life’s irritations with calmness and self-control",
+"Self-control", "The restraint or control of one’s thoughts, actions, speech and person"
+];
+
+const NumberEvents = 9;
+
+var ActualEvent = 1;
+var ErrorsCount = 0;
+
+function PopulateListOfEvents() {
+
+	let iEvent = 1;
+	let idEvent = "Event";
+	let iRandomLeft = 1;
+	let iRandomRight = 1;
+	let tempEvent = "";
+	let tempKing = "";
+
+	document.getElementById("finish").innerHTML = "0/" + NumberEvents.toString();
+	document.getElementById("finish").style = "color:green";
+	document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+	
+	for (let i = 0; i < 15; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberEvents) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		}
+
+		tempKing = Events[(iRandomLeft-1)*2];
+		tempEvent = Events[((iRandomLeft-1)*2)+1];
+		Events[(iRandomLeft-1)*2] = Events[(iRandomRight-1)*2];
+		Events[((iRandomLeft-1)*2)+1] = Events[((iRandomRight-1)*2)+1];
+		Events[(iRandomRight-1)*2] = tempKing;
+		Events[((iRandomRight-1)*2)+1] = tempEvent;		
+	}
+
+	document.getElementById("Event").innerHTML = Events[1];
+}
+
+
+function CheckKing(idCheckKing) {
+
+	let KingGuessed = "";
+	
+	KingGuessed = document.getElementById(idCheckKing).innerHTML;
+	
+	if (KingGuessed == Events[((ActualEvent-1)*2)]) {
+		
+		oldColor = document.getElementById(idCheckKing).style.backgroundColor;  
+		document.getElementById(idCheckKing).style = "background-color:green";
+		setTimeout(RedToGray,800,idCheckKing, oldColor);
+		
+		document.getElementById("finish").innerHTML = ActualEvent.toString() + "/" + NumberEvents.toString();
+		document.getElementById("finish").style = "color:green";
+		ActualEvent = ActualEvent + 1;
+		document.getElementById("Event").innerHTML = Events[((ActualEvent-1)*2)+1];
+	}
+	else {
+		ErrorsCount = ErrorsCount + 1;
+		document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+		
+		oldColor = document.getElementById(idCheckKing).style.backgroundColor;  
+		document.getElementById(idCheckKing).style = "background-color:red";
+		setTimeout(RedToGray,800,idCheckKing, oldColor);
+	}
+	
+	if (ActualEvent == (NumberEvents+1)) {
+		document.getElementById("finish").style = "color:green";
+		document.getElementById("finish").innerHTML = "!! Congratulations !!";
+		document.getElementById("Event").innerHTML = "";
+	}
+		
+}
+
+function RedToGray(idCheckKing, oldColor) {
+
+	document.getElementById(idCheckKing).style = oldColor;
+	
+}
+
+</script>
+
+<style>
+.buttonBig {
+  font-size: 36px;	
+  font-family:verdana;
+  width: 50%}
+ 
+ .parBig {
+   font-size: 40px;
+   font-family:verdana;
+   }
+     
+ .parMid {
+   font-size: 30px;
+   font-family:verdana;
+   color: red;
+   }
+
+ .parMidBlue {
+   font-size: 30px;
+   font-family:verdana;
+   color: blue;
+   }
+  
+ .parSma {
+   font-size: 22px;
+   font-family:verdana;
+   }
+   
+.navbar {
+  position:fixed;
+  text-align:center;
+  font-size:40px;
+  font-family:verdana;
+  }
+  
+.main {
+  margin-top:30px;
+  }
+</style>
+
+</head>
+
+<body onload="PopulateListOfEvents()">
+
+<div>
+<center>
+<p class="parBig">Select the Fruit of the spirit according to the Description</p>
+
+<p></p>
+<p id="Event" class="parMidBlue"></p>
+<p></p>
+<p id="finish" class="parBig"></p>
+<p id="errors" class="parMid"></p>
+<p></p>
+</center>
+</div>
+
+<div>
+<center>
+
+<button type="button" id="Event1" onclick="CheckKing(this.id)" class="buttonBig">Love</button>
+<p></p>
+<button type="button" id="Event2" onclick="CheckKing(this.id)" class="buttonBig">Joy</button>
+<p></p>
+<button type="button" id="Event3" onclick="CheckKing(this.id)" class="buttonBig">Peace</button>
+<p></p>
+<button type="button" id="Event4" onclick="CheckKing(this.id)" class="buttonBig">Patience</button>
+<p></p>
+<button type="button" id="Event5" onclick="CheckKing(this.id)" class="buttonBig">Kindness</button>
+<p></p>
+<button type="button" id="Event6" onclick="CheckKing(this.id)" class="buttonBig">Goodness</button>
+<p></p>
+<button type="button" id="Event7" onclick="CheckKing(this.id)" class="buttonBig">Faith</button>
+<p></p>
+<button type="button" id="Event8" onclick="CheckKing(this.id)" class="buttonBig">Mildness</button>
+<p></p>
+<button type="button" id="Event9" onclick="CheckKing(this.id)" class="buttonBig">Self-control</button>
+<p></p>
+
+</center>
+</div>
+
+</body>
+</html>
