@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script>
+
+const Kings = [
+"John the Baptist begins his ministry (Lu 3:1-18)",
+"Tempted by the Devil (Mt 4:1-11)",
+"John the Baptist identifies Jesus as the Lamb of God; first diciples join Jesus (Joh 1:19-51)",
+"First miracle at wedding, turns water into wine (Joh 2:1-12)",
+"Heals woman's flow of blood; resurrects Jairus' daughter (Mr 5:21-43)",
+"Heals the blind ans speechless (probably in Capernaum) (Mt 9:27-34)",
+"Rejected again in his hometown (Mr 6:1-6)",
+"Third tour of Galilee; expands work by sending out apostles (Mt 9:35-10:42)",
+"Herod beheads John the Baptist; Herod perplexed by Jesus (Mt 14:1-12)",
+"Apostles return from preaching tour; Jesus feeds 5000 men (Mr 6:30-44)",
+"Says he is the bread of life; many are stumbled and leave (in Capernaum) (Joh 6:25-71)",
+"Exposes human traditions; heals Syrophoenician woman's daughter (Mt 15:1-31)",
+"Feeds 4000 men; give no sign but sign of Jonah; on boat to Bethsaida warns against leaven of Pharisees (Mt 15:32–16:12)",
+"Heals blind man in Bethsaida (Mr 8:22-27a)",
+"Key of the Kingdom; foretells his death and resurrection; Transfiguration (Mt 16:13-17:13)",
+"Heals man born blind in Jerusalem (Joh 9:19-41)",
+"Sends out the 70; they return joyful; neighborly Samaritan illustration (Lu 10:1-37)",
+"Visits Mary and Martha's home; Teaches model prayer again; persistent friend illustration (Lu 10:38-11:13)",
+"Expels demons by God's finger; again gives only sign of Jonah (Lu 11:14-36)",
+"Lazarus resurrected; plot to kill Jesus; he leaves (Joh 11:38-54)",
+"Heals 10 lepers;tells how God's Kingdom will come; illustrations of persistent widow, Pharisee and tax collector (Lu 17:11-18:14)",
+"Teaches on marriage and divorce; blesses the children (Mt 19:1-15)",
+"Jesus arrives in Bethany six days before Passover; Mary pours oil on his head and feet (Joh 11:55-12:11)",
+"Enters Jerusalem triumphantly, riding on a donkey (Mt 21:1-11,14-17)",
+"Curses fig tree; cleanses temple again; chief priests scheme to kill Jesus (Mr 11:12-18)",
+"Jehovah speaks; Jesus foretells his death; disbelief of Jews fulfills prophecy of Isaiah (Joh 12:20-50)",
+"Withered fig tree lesson; his authority challenged (Mr 11:19-33)",
+"Jewish leaders plot to kill him; Judas arranges betrayal; prepares for last Passover (Lu 22:1-14)",
+"Washes feet of apostles; Jesus identifies Judas as traitor and dismisses him (Joh 13:1-30)",
+"Institutes the Lord's Evening Meal; foretells Peter's denials and scettering of apostles (Lu 22:20,24-38)",
+"Promises helper; illustration of true vine; gives command to love; last prayer with apostles (Joh 14:1-17:26)",
+"Agony in the garden of Gethsemane; Jesus' betrayal (Mt 26:36-50)",
+"Jesus questionned by Annas (Joh 18:13,19-24)",
+"Trial by Caiaphas, Sanhedrin; Peter denies him (Mt 26:59-27:10)",
+"Before Pilat, then Herod, and back to Pilate (Lu 23:1-16)",
+"Pilate seeks Jesus' release but Jews ask for Barabbas; sentenced to death on the torture stake (Joh 18:39-19:16)",
+"Dies on torture stake (Lu 23:26-43)"
+];
+
+const RandomKings = [
+"John the Baptist begins his ministry (Lu 3:1-18)",
+"Tempted by the Devil (Mt 4:1-11)",
+"John the Baptist identifies Jesus as the Lamb of God; first diciples join Jesus (Joh 1:19-51)",
+"First miracle at wedding, turns water into wine (Joh 2:1-12)",
+"Heals woman's flow of blood; resurrects Jairus' daughter (Mr 5:21-43)",
+"Heals the blind ans speechless (probably in Capernaum) (Mt 9:27-34)",
+"Rejected again in his hometown (Mr 6:1-6)",
+"Third tour of Galilee; expands work by sending out apostles (Mt 9:35-10:42)",
+"Herod beheads John the Baptist; Herod perplexed by Jesus (Mt 14:1-12)",
+"Apostles return from preaching tour; Jesus feeds 5000 men (Mr 6:30-44)",
+"Says he is the bread of life; many are stumbled and leave (in Capernaum) (Joh 6:25-71)",
+"Exposes human traditions; heals Syrophoenician woman's daughter (Mt 15:1-31)",
+"Feeds 4000 men; give no sign but sign of Jonah; on boat to Bethsaida warns against leaven of Pharisees (Mt 15:32–16:12)",
+"Heals blind man in Bethsaida (Mr 8:22-27a)",
+"Key of the Kingdom; foretells his death and resurrection; Transfiguration (Mt 16:13-17:13)",
+"Heals man born blind in Jerusalem (Joh 9:19-41)",
+"Sends out the 70; they return joyful; neighborly Samaritan illustration (Lu 10:1-37)",
+"Visits Mary and Martha's home; Teaches model prayer again; persistent friend illustration (Lu 10:38-11:13)",
+"Expels demons by God's finger; again gives only sign of Jonah (Lu 11:14-36)",
+"Lazarus resurrected; plot to kill Jesus; he leaves (Joh 11:38-54)",
+"Heals 10 lepers;tells how God's Kingdom will come; illustrations of persistent widow, Pharisee and tax collector (Lu 17:11-18:14)",
+"Teaches on marriage and divorce; blesses the children (Mt 19:1-15)",
+"Jesus arrives in Bethany six days before Passover; Mary pours oil on his head and feet (Joh 11:55-12:11)",
+"Enters Jerusalem triumphantly, riding on a donkey (Mt 21:1-11,14-17)",
+"Curses fig tree; cleanses temple again; chief priests scheme to kill Jesus (Mr 11:12-18)",
+"Jehovah speaks; Jesus foretells his death; disbelief of Jews fulfills prophecy of Isaiah (Joh 12:20-50)",
+"Withered fig tree lesson; his authority challenged (Mr 11:19-33)",
+"Jewish leaders plot to kill him; Judas arranges betrayal; prepares for last Passover (Lu 22:1-14)",
+"Washes feet of apostles; Jesus identifies Judas as traitor and dismisses him (Joh 13:1-30)",
+"Institutes the Lord's Evening Meal; foretells Peter's denials and scettering of apostles (Lu 22:20,24-38)",
+"Promises helper; illustration of true vine; gives command to love; last prayer with apostles (Joh 14:1-17:26)",
+"Agony in the garden of Gethsemane; Jesus' betrayal (Mt 26:36-50)",
+"Jesus questionned by Annas (Joh 18:13,19-24)",
+"Trial by Caiaphas, Sanhedrin; Peter denies him (Mt 26:59-27:10)",
+"Before Pilat, then Herod, and back to Pilate (Lu 23:1-16)",
+"Pilate seeks Jesus' release but Jews ask for Barabbas; sentenced to death on the torture stake (Joh 18:39-19:16)",
+"Dies on torture stake (Lu 23:26-43)"
+];
+
+/*
+const Kings = ["Rehoboam", "Abijah", "Asa", "Jehoshaphat", "Jehoram",
+"Ahaziah", "Queen Athaliah", "Jehoash", "Amaziah", "Uzziah (Azariah)", 
+"Jotham", "Ahaz", "Hezekiah", "Manasseh", "Amon", "Josiah", "Jehoahaz",
+"Jehoiakim", "Jehoiachin", "Zedekiah"];
+
+const RandomKings = ["Rehoboam", "Abijah", "Asa", "Jehoshaphat", "Jehoram",
+"Ahaziah", "Queen Athaliah", "Jehoash", "Amaziah", "Uzziah (Azariah)", 
+"Jotham", "Ahaz", "Hezekiah", "Manasseh", "Amon", "Josiah", "Jehoahaz",
+"Jehoiakim", "Jehoiachin", "Zedekiah"];
+*/
+
+const NumberKings = 37;
+
+var ActualKing = 1;
+var ErrorsCount = 0;
+
+function PopulateListOfKings() {
+
+	let iKing = 1;
+	let idKing = "King";
+	let iRandomLeft = 1;
+	let iRandomRight = 1;
+	let tempKing = ""
+
+	document.getElementById("finish").innerHTML = "0/37";
+	document.getElementById("finish").style = "color:green";
+	document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+	
+	for (let i = 0; i < 40; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberKings) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberKings) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberKings) + 1;
+		}
+
+		tempKing = RandomKings[iRandomLeft-1];
+		RandomKings[iRandomLeft-1] = RandomKings[iRandomRight-1];
+		RandomKings[iRandomRight-1] = tempKing
+	
+	}
+	
+	while (iKing <= NumberKings) {
+		
+		idKing = "King" + iKing.toString();
+		document.getElementById(idKing).innerHTML = RandomKings[iKing-1];
+		iKing = iKing + 1;
+	}	
+	
+}
+
+
+function CheckKing(idCheckKing) {
+
+	let KingGuessed = "";
+	
+	KingGuessed = document.getElementById(idCheckKing).innerHTML;
+	
+	if (KingGuessed == Kings[ActualKing-1]) {
+		document.getElementById(idCheckKing).style = "background-color:green";
+		document.getElementById(idCheckKing).disabled = 1;
+		document.getElementById("finish").innerHTML = ActualKing.toString() + "/37";
+		document.getElementById("finish").style = "color:green";
+		ActualKing = ActualKing + 1;
+	}
+	else {
+		ErrorsCount = ErrorsCount + 1;
+		document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+		oldColor = document.getElementById(idCheckKing).style.backgroundColor;  
+		document.getElementById(idCheckKing).style = "background-color:red";
+		setTimeout(RedToGray,800,idCheckKing, oldColor);
+	}
+	
+	if (ActualKing == (NumberKings+1)) {
+		document.getElementById("finish").style = "color:green";
+		document.getElementById("finish").innerHTML = "!! Congratulations !!";
+	}
+		
+}
+
+function RedToGray(idCheckKing, oldColor) {
+
+	document.getElementById(idCheckKing).style = oldColor;
+	
+}
+
+</script>
+
+<style>
+.buttonBig {
+  font-size: 40px;	
+  font-family:verdana;
+  width: 50%}
+ 
+ .parBig {
+   font-size: 40px;
+   font-family:verdana;
+   }
+   
+ .parMid {
+   font-size: 30px;
+   font-family:verdana;
+   color: red;
+   }
+   
+.navbar {
+  position:fixed;
+  text-align:center;
+  font-size:40px;
+  font-family:verdana;
+  }
+  
+.main {
+  margin-top:30px;
+  }
+</style>
+
+</head>
+
+<body onload="PopulateListOfKings()">
+
+<div>
+<center>
+<p class="parBig"><B>Order the Events in Jesus life</B></p>
+<p></p>
+<p id="finish" class="parBig"></p>
+<p id="errors" class="parMid"></p>
+<p></p>
+</center>
+</div>
+
+<div>
+<center>
+
+<button type="button" id="King1" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King2" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King3" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King4" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King5" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King6" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King7" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King8" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King9" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King10" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King11" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King12" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King13" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King14" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King15" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King16" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King17" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King18" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King19" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King20" onclick="CheckKing(this.id)" class="buttonBig"></button>
+<p></p>
+<button type="button" id="King21" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King22" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King23" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King24" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King25" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King26" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King27" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King28" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King29" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King30" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King31" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King32" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King33" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King34" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King35" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King36" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+<button type="button" id="King37" onclick="CheckKing(this.id)" class="buttonBig"></button><p></p>
+
+</center>
+</div>
+
+</body>
+</html>
