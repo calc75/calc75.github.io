@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script>
+
+const II_MISS_JOU = 1;
+const III_MISS_JOU = 2;
+const I_PRISON = 3;
+const BETW_PRISON = 4;
+const II_PRISON = 5;
+
+
+const Events = [
+"John the Baptist begins his ministry", "29, spring",
+"Tempted by the Devil", "29, fall",
+"John the Baptist identifies Jesus as the Lamb of God", "29, fall",
+"First disciples join Jesus", "29, fall",  
+"First miracle at wedding, turns water into wine; visits Capernaum", "29, fall",
+"Heals woman’s flow of blood; resurrects Jairus’ daughter", "31 or 32",
+"Heals the blind and speechless (likely at Capernaum)", "31 or 32",
+"Rejected again in his hometown", "31 or 32", 
+"Third tour of Galilee; expands work by sending out apostles", "31 or 32",
+"Herod beheads John the Baptist; Herod perplexed by Jesus", "31 or 32",
+"Apostles return from preaching tour; Jesus feeds 5000 men", "32, near Passover",
+"Says he is “the bread of life”; many are stumbled and leave", "32, near Passover",
+"Exposes human traditions; Heals Syrophoenician woman’s daughter", "32, after Passover",
+"Heals a deaf man in the Decapolis", "32, after Passover",
+"Feeds 4,000 men; Gives no sign but sign of Jonah; warns against leaven of the Pharisees and Sadducees", "32, after Passover",
+"Heals blind man in Bethsaida", "32, after Passover",
+"Keys of the Kingdom; foretells his death and resurrection; Transfiguration; Jehovah speaks", "32, after Passover",
+"Heals man born blind", "32, Festival of Tabernacles",
+"Sends out the 70; they return joyful; Neighborly Samaritan illustration", "32, Festival of Tabernacles",
+"Visits Mary and Martha’s home; Teaches model prayer again; persistent friend illustration", "32, Festival of Tabernacles",
+"Expels demons by God’s finger; again gives only sign of Jonah", "32, Festival of Tabernacles",
+"Dines with Pharisee; condemns hypocrisy of Pharisees", "32, Festival of Tabernacles",
+"Heals ten lepers; tells how God’s Kingdom will come; Illustrations: persistent widow, Pharisee and tax collector", "32, after Festival of Dedication",
+"Teaches on marriage and divorce; Blesses the children (in Perea)", "32, after Festival of Dedication",
+"Jesus arrives six days before Passover; Mary pours oil on his head and feet", "33, Nisan 8 and 9",
+"Riding on a donkey; triumphal entry into Jerusalem", "33, Nisan 9",
+"Jesus weeps over Jerusalem", "33, Nisan 9",
+"Jesus enters Jerusalem", "33, Nisan 9",
+"Curses fig tree; cleanses temple again", "33, Nisan 10",
+"Jehovah speaks; Jesus foretells his death; disbelief of Jews fulfills prophecy of Isaiah", "33, Nisan 10",
+"Withered fig tree lesson; His authority challenged; illustration of two sons", "33, Nisan 11",
+"Tells his apostles about his execution", "33, Nisan 12",
+"Judas arranges betrayal; Prepares for last Passover", "33, Nisan 12 and 13",
+"Washes feet of apostles; Jesus identifies Judas as traitor and dismisses him", "33, Nisan 14",
+"Institutes the Lord’s Evening Meal; Foretells Peter’s denials and scattering of apostles", "33, Nisan 14",
+"Promises helper; illustration of true vine; gives command to love; last prayer with apostles", "33, Nisan 14",
+"Prays in Gethsemane; Betrayed and arrested in the garden of Gethsemane", "33, Nisan 14",
+"Taken to chief priest Annas; Jesus before Annas", "33, Nisan 14",
+"Brought before Sanhedrin; Peter denies Jesus three times and weeps bitterly; Jesus handed over to Pilate; Judas feels remorse and hangs himself", "33, Nisan 14",
+"Jesus before Pilate; the issue of kingship", "33, Nisan 14",
+"Taken to Herod, then back to Pilate", "33, Nisan 14",
+"Pilate seeks to release Jesus but yields to the Jews", "33, Nisan 14",
+"Addresses the daughters of Jerusalem; Jesus promises: You will be with me in Paradise", "33, Nisan 14"
+];
+
+const NumberEvents = 43;
+
+var ActualEvent = 1;
+var ErrorsCount = 0;
+
+function PopulateListOfEvents() {
+
+	let iEvent = 1;
+	let idEvent = "Event";
+	let iRandomLeft = 1;
+	let iRandomRight = 1;
+	let tempEvent = "";
+	let tempKing = "";
+
+	document.getElementById("finish").innerHTML = "0/" + NumberEvents.toString();
+	document.getElementById("finish").style = "color:green";
+	document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+	
+	for (let i = 0; i < 45; i++) {
+
+		iRandomLeft = Math.floor(Math.random() * NumberEvents) + 1;
+		iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		
+		while (iRandomLeft == iRandomRight) {
+			iRandomRight = Math.floor(Math.random() * NumberEvents) + 1;
+		}
+
+		tempKing = Events[(iRandomLeft-1)*2];
+		tempEvent = Events[((iRandomLeft-1)*2)+1];
+		Events[(iRandomLeft-1)*2] = Events[(iRandomRight-1)*2];
+		Events[((iRandomLeft-1)*2)+1] = Events[((iRandomRight-1)*2)+1];
+		Events[(iRandomRight-1)*2] = tempKing;
+		Events[((iRandomRight-1)*2)+1] = tempEvent;		
+	}
+
+	document.getElementById("Event").innerHTML = Events[0];
+}
+
+
+function CheckPeriod(idCheckPeriod) {
+
+	let PeriodGuessed = "";
+	
+	PeriodGuessed = document.getElementById(idCheckPeriod).innerHTML;
+	
+	if (PeriodGuessed == Events[((ActualEvent-1)*2)+1]) {
+		
+		oldColor = document.getElementById(idCheckPeriod).style.backgroundColor;  
+		document.getElementById(idCheckPeriod).style = "background-color:green";
+		setTimeout(RedToGray,800,idCheckPeriod, oldColor);
+		
+		document.getElementById("finish").innerHTML = ActualEvent.toString() + "/" + NumberEvents.toString();
+		document.getElementById("finish").style = "color:green";
+		ActualEvent = ActualEvent + 1;
+		document.getElementById("Event").innerHTML = Events[((ActualEvent-1)*2)];
+	}
+	else {
+		ErrorsCount = ErrorsCount + 1;
+		document.getElementById("errors").innerHTML = "Error: " + ErrorsCount.toString();
+		
+		oldColor = document.getElementById(idCheckPeriod).style.backgroundColor;  
+		document.getElementById(idCheckPeriod).style = "background-color:red";
+		setTimeout(RedToGray,800,idCheckPeriod, oldColor);
+	}
+	
+	if (ActualEvent == (NumberEvents+1)) {
+		document.getElementById("finish").style = "color:green";
+		document.getElementById("finish").innerHTML = "!! Congratulations !!";
+		document.getElementById("Event").innerHTML = "";
+	}
+		
+}
+
+function RedToGray(idCheckPeriod, oldColor) {
+
+	document.getElementById(idCheckPeriod).style = oldColor;
+	
+}
+
+</script>
+
+<style>
+.buttonBig {
+  font-size: 36px;	
+  font-family:verdana;
+  width: 50%}
+ 
+ .parBig {
+   font-size: 40px;
+   font-family:verdana;
+   }
+     
+ .parMid {
+   font-size: 30px;
+   font-family:verdana;
+   color: red;
+   }
+
+ .parMidBlue {
+   font-size: 30px;
+   font-family:verdana;
+   color: blue;
+   }
+  
+ .parSma {
+   font-size: 22px;
+   font-family:verdana;
+   }
+   
+.navbar {
+  position:fixed;
+  text-align:center;
+  font-size:40px;
+  font-family:verdana;
+  }
+  
+.main {
+  margin-top:30px;
+  }
+</style>
+
+</head>
+
+<body onload="PopulateListOfEvents()">
+
+<div>
+<center>
+<p class="parBig">Guess the period when events of Jesus' ministry occured</p>
+
+<p></p>
+<p id="Event" class="parMidBlue"></p>
+<p></p>
+<p id="finish" class="parBig"></p>
+<p id="errors" class="parMid"></p>
+<p></p>
+</center>
+</div>
+
+<div>
+<center>
+
+<button type="button" id="Event1" onclick="CheckPeriod(this.id)" class="buttonBig">29, spring</button>
+<p></p>
+<button type="button" id="Event2" onclick="CheckPeriod(this.id)" class="buttonBig">29, fall</button>
+<p></p>
+<button type="button" id="Event3" onclick="CheckPeriod(this.id)" class="buttonBig">31 or 32</button>
+<p></p>
+<button type="button" id="Event4" onclick="CheckPeriod(this.id)" class="buttonBig">32, near Passover</button>
+<p></p>
+<button type="button" id="Event5" onclick="CheckPeriod(this.id)" class="buttonBig">32, after Passover</button>
+<p></p>
+<button type="button" id="Event6" onclick="CheckPeriod(this.id)" class="buttonBig">32, Festival of Tabernacles</button>
+<p></p>
+<button type="button" id="Event7" onclick="CheckPeriod(this.id)" class="buttonBig">32, after Festival of Dedication</button>
+<p></p>
+<button type="button" id="Event8" onclick="CheckPeriod(this.id)" class="buttonBig">33, Nisan 8 and 9</button>
+<p></p>
+<button type="button" id="Event9" onclick="CheckPeriod(this.id)" class="buttonBig">33, Nisan 9</button>
+<p></p>
+<button type="button" id="Event10" onclick="CheckPeriod(this.id)" class="buttonBig">33, Nisan 10</button>
+<p></p>
+<button type="button" id="Event11" onclick="CheckPeriod(this.id)" class="buttonBig">33, Nisan 11</button>
+<p></p>
+<button type="button" id="Event12" onclick="CheckPeriod(this.id)" class="buttonBig">33, Nisan 12</button>
+<p></p>
+<button type="button" id="Event13" onclick="CheckPeriod(this.id)" class="buttonBig">33, Nisan 12 and 13</button>
+<p></p>
+<button type="button" id="Event14" onclick="CheckPeriod(this.id)" class="buttonBig">33, Nisan 14</button>
+<p></p>
+
+</center>
+</div>
+
+</body>
+</html>
